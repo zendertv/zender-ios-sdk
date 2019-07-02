@@ -163,7 +163,7 @@ The second step is to add the frameworks as embedded frameworks:
 - Select Other to add the framework
 - Browse to your manually downloaded sdk file
 - Add frameworks `Zender`, `ZenderPhenix` and `PhenixSdk`
-- When a screen pops up to 'Choose options for adding these files' `(Deselect Copy if needed, Select Create folder references)`
+- When a screen pops up to 'Choose options for adding these files' `(Select Copy if needed)`
 
 ![Add to Embedded Frameworks](docs/images/ios/framework-embed.png?raw=true "Add to Embedded Frameworks")
 
