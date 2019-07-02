@@ -153,6 +153,8 @@ Note: The pod downloads a large zip file containing the frameworks , this might 
 
 ## Manual installation
 
+A zip file containing the sdk frameworks can be downloaded from `https://repo.zender.tv/ios/zender-ios-sdk-v2.1.0.zip`
+
 ### Add to Embedded Frameworks to the project
 The second step is to add the frameworks as embedded frameworks:
 - Select your Application Target (on the left)
