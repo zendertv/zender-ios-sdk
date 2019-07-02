@@ -2,7 +2,7 @@
 
 This repository provides the iOS sdk version of the Zender Player.
 
-Current version is `2.0.2`
+Current version is `2.0.2` , target :ios 9.0
 
 # Find your configuration in the Zender Admin
 - Logging to the admin <https://admin.zender.tv>
@@ -153,7 +153,7 @@ Note: The pod downloads a large zip file containing the frameworks , this might 
 
 ## Manual installation
 
-A zip file containing the sdk frameworks can be downloaded from `https://repo.zender.tv/ios/zender-ios-sdk-v2.1.0.zip`
+A zip file containing the sdk frameworks can be downloaded from <https://repo.zender.tv/ios/zender-ios-sdk-v2.1.0.zip>
 
 ### Add to Embedded Frameworks to the project
 The second step is to add the frameworks as embedded frameworks:
@@ -223,9 +223,11 @@ This requires push notification certificate setup to match the bundleId of your 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[Zender sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
+```
 
 # Deeplinking
 ## Sample code
+```
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
     
     BOOL handled = [[Zender sharedInstance] handleUniversalLink:userActivity.webpageURL completion:^(NSError *error) {
@@ -238,58 +240,10 @@ This requires push notification certificate setup to match the bundleId of your 
 
 ```
 
-The push notification can contain the targetId, channelId and/or streamId allowing you to directly start a stream.
-This needs to be implemented in your app to capture and handle the push notifications
+# Advanced
+More advanced topics are described at (Advanced Documentation)[ADVANCED.md]
 
-```
-{
-    aps =     {
-        alert = "Get ready for the quiz!";
-        sound = default;
-    };
-    data =     {
-        message = "Get ready for the quiz!";
-        zender =         {
-            channelId = "<channelId>";
-            targetId = "<targetId>";
-        };
-    };
-}
-```
-
-There is a convenience method to check if this was a Zender Notification
-```
-#import <Zender/Zender.h>
-if ([[Zender sharedInstance] isZenderNotification:userInfo]) {
-}
-```
-
-# Zender Streams
-## Listing all upcoming streams
-You can retrieve the schedule of upcoming Zender Streams as follows:
-
-```
-ZenderApiClient *_apiClient = [[ZenderApiClient alloc] initWithTargetId:targetId channelId:channelId];
-_apiClient.authentication = authentication; // Reuse the authentication (see above)
-
-[_apiClient login:^(NSError *error, ZenderSession *session) {
-    if (error == nil) {
-        [self->_apiClient  getStreams:^(NSError *error, NSSArray *streams) {
-          // streams contains an Array of ZenderStream Objects
-        }];
-    }
-}];
-```
-
-## Stream information
-The ZenderStream object contains:
-- streamId: A unique stream Id
-- streamTitle: the title of the stream
-- streamDescription: a longer description of the stream
-- airDate : date when the stream will be live
-- streamState: one of the states before, live, after
-
-# Releases
+# Versioning
 We adhere to the Semantic Versions scheme to indiciate releases. Versions starting with 0.x should be considered beta versions and not yet ready for production use.
 
 # Privacy
