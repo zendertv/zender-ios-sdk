@@ -212,13 +212,25 @@ To be able to play audio in background, add this to the background mode:
 
 ![Background Audio](docs/images/ios/background-audio.png?raw=true "Background Audio")
 
+### UI Fullscreen
+On iPad screens can be viewed in split screen , it's best to disable that
+![Enable Full screen only](docs/images/ios/full-screen.png?raw=true "Enable Full Screen")
+
 
 # Push notifications
 The Zender Admin console provides a way to send push notifications to users to notifiy them when new streams are available.
 This requires push notification certificate setup to match the bundleId of your app and allowing us to send the push notifications.
 
-# Sample code
+## Enable Push notifications in your project/provisioning profile
+![Enable Push notifications](docs/images/ios/enable-push-notifications.png?raw=true "Enable Push notifications")
+
+
+## Sample code
+Just add the following part to your `AppDelegate.m`
+
 ```objective-c
+
+@import Zender;
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[Zender sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
@@ -226,8 +238,17 @@ This requires push notification certificate setup to match the bundleId of your 
 ```
 
 # Deeplinking
+Zender supports using Universal Deeplinks. The default zender domain is links.zender.tv . To make this work, the AppId needs to be configured in the backend.
+
+## Enable Universal Links
+![Enable Universal Links](docs/images/ios/enable-universallinks.png?raw=true "Enable Universal links")
+
 ## Sample code
-```
+Just add the following code so Zender handles the deeplinks
+
+```objective-c
+@import Zender;
+
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
     
     BOOL handled = [[Zender sharedInstance] handleUniversalLink:userActivity.webpageURL completion:^(NSError *error) {
@@ -242,6 +263,9 @@ This requires push notification certificate setup to match the bundleId of your 
 
 # Advanced
 More advanced topics are described at [Advanced Documentation](ADVANCED.md)
+
+# Version 1 Documentation
+Since version 2.0.0 a lot has changed , but you can still read the [Version 1 Documentation](README-v1.md)
 
 # Versioning
 We adhere to the Semantic Versions scheme to indiciate releases. Versions starting with 0.x should be considered beta versions and not yet ready for production use.
