@@ -148,6 +148,7 @@ A sample project is provided in this repo [Demo Project](ZenderDemo)
 @end
 ```
 
+For a more detailed explantion on authentication see <https://github.com/zendertv/zender-docs/blob/master/AUTH.md>
 # Installation
 ## Using cocoapods
 The sdk is provided via private Cocoapod repository.
