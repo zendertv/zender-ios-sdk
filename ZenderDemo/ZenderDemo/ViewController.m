@@ -28,7 +28,7 @@
     
     targetId = @"<your-target-id>"; // fill-in your own targetId
     channelId = @"<your-channel-id>"; // fill-in your own channelId
-    
+        
     // Create a Zender Player
     self.player= [ZenderPlayer new];
     
@@ -43,6 +43,9 @@
     
     // Set this class as a ZenderPlayerDelegate
     self.player.delegate = self;
+    
+    // Set a background color, the player is transparent by default
+    self.player.view.backgroundColor=[UIColor blackColor];
     
     self.player.view.frame = self.view.frame;
     self.player.view.hidden = false;

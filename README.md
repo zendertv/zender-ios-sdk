@@ -147,7 +147,10 @@ Current version is `2.1.0` , target :ios 9.0
 The sdk is provided via private Cocoapod repository.
 Add the following to the top of your Podfile
 
-`source 'https://github.com/zendertv/Specs.git'`
+```
+source 'https://github.com/zendertv/Specs.git'`
+source 'https://github.com/CocoaPods/Specs.git'
+```
 
 
 Add this pod :

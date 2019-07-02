@@ -2,6 +2,7 @@
 # platform :ios, '9.0'
 
 source 'https://github.com/zendertv/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'ZenderDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -9,6 +10,7 @@ target 'ZenderDemo' do
 
   # Pods for ZenderDemo
   pod 'Zender'
+  # pod 'Zender/Youtube'
 
   target 'ZenderDemoTests' do
     inherit! :search_paths
