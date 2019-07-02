@@ -2,7 +2,7 @@
 
 This repository provides the iOS sdk version of the Zender Player.
 
-Current version is `2.0.2` , target :ios 9.0
+Current version is `2.1.0` , target :ios 9.0
 
 # Find your configuration in the Zender Admin
 - Logging to the admin <https://admin.zender.tv>
@@ -241,7 +241,7 @@ This requires push notification certificate setup to match the bundleId of your 
 ```
 
 # Advanced
-More advanced topics are described at (Advanced Documentation)[ADVANCED.md]
+More advanced topics are described at [Advanced Documentation](ADVANCED.md)
 
 # Versioning
 We adhere to the Semantic Versions scheme to indiciate releases. Versions starting with 0.x should be considered beta versions and not yet ready for production use.

@@ -11,42 +11,6 @@ Through a javascript/native bridge data and events are exposed to the native app
 - The webview asks to native that it's ready. It does so by sending 'zender:ready'. When the webview responds back with 'zender:ready' they can continue
 - The theming and locales are injected over a javascript function that is inject at the document of the html
 
-# Streams
-## To initialize a specific stream:
-
-```
-@import Zender;
-
-NSString *targetId  = @"ttttttttt-tttt-tttt-tttt-ttttttttt";
-NSString *channelId = @"ccccccccc-cccc-cccc-cccc-ccccccccc";
-NSString *streamI@d = @"sssssssss-ssss-ssss-ssss-sssssssss";
-ZenderPlayerConfig *config = [ZenderPlayerConfig configWith:targetId channelId:channelId streamId:streamId];
-self.player.config=config ;
-
-```
-## Listing all streams
-You can retrieve the schedule of upcoming Zender Streams as follows:
-
-```
-ZenderApiClient *_apiClient = [[ZenderApiClient alloc] initWithTargetId:targetId channelId:channelId];
-_apiClient.authentication = authentication; // Reuse the authentication (see above)
-
-[_apiClient login:^(NSError *error, ZenderSession *session) {
-    if (error == nil) {
-        [self->_apiClient  getStreams:^(NSError *error, NSSArray *streams) {
-          // streams contains an Array of ZenderStream Objects
-        }];
-    }
-}];
-```
-
-The ZenderStream object contains:
-- streamId: A unique stream Id
-- streamTitle: the title of the stream
-- streamDescription: a longer description of the stream
-- airDate : date when the stream will be live
-- streamState: one of the states before, live, after
-
 # Player
 ## Mute/Unmute Sound
 You can mute/unmute the sound of the ZenderPlayer & Video (for example to play an advertisement)
@@ -84,16 +48,11 @@ NSString *apiEndpoint = @"https://api.zender.tv";
 [config overrideApiEndpoint:apiEndpoint];
 ```
 
-# Analytics
-The Zender Admin console has an overview of different analytics. We can additionally support Google Analytics out the box.
-For this the `GA trackedId` needs to be added to the admin console.
+## Background handling
+The player tranparently handles the background/foreground handling.
 
-For further analytics or integration in your own system you can listen to the events exposed by the ZenderPlayerDelegate.
-
-Note: 
 - Depending on the video provider this will actually stop the streaming or not
 - Phenix Player just stops the rendering not the data streaming (this will be improved in future versions)
-
 
 ## Events/Delegate
 Events happening in the ZenderPlayer are exposed and can be handled by a `ZenderPlayerDelegate` add this to your class.
@@ -206,14 +165,59 @@ The payload provided is currently a raw JSON payload, we will convert this to sp
 
 ```
 
+
+# Streams
+## To initialize a specific stream:
+
+```
+@import Zender;
+
+NSString *targetId  = @"ttttttttt-tttt-tttt-tttt-ttttttttt";
+NSString *channelId = @"ccccccccc-cccc-cccc-cccc-ccccccccc";
+NSString *streamI@d = @"sssssssss-ssss-ssss-ssss-sssssssss";
+ZenderPlayerConfig *config = [ZenderPlayerConfig configWith:targetId channelId:channelId streamId:streamId];
+self.player.config=config ;
+
+```
+## Listing all streams
+You can retrieve the schedule of upcoming Zender Streams as follows:
+
+```
+ZenderApiClient *_apiClient = [[ZenderApiClient alloc] initWithTargetId:targetId channelId:channelId];
+_apiClient.authentication = authentication; // Reuse the authentication (see above)
+
+[_apiClient login:^(NSError *error, ZenderSession *session) {
+    if (error == nil) {
+        [self->_apiClient  getStreams:^(NSError *error, NSSArray *streams) {
+          // streams contains an Array of ZenderStream Objects
+        }];
+    }
+}];
+```
+
+The ZenderStream object contains:
+- streamId: A unique stream Id
+- streamTitle: the title of the stream
+- streamDescription: a longer description of the stream
+- airDate : date when the stream will be live
+- streamState: one of the states before, live, after
+
+
+# Analytics
+Zender tracks many metrics. See [Detailed Analytics Documentation](ANALYTICS.md) for further detail.
+
+For further analytics or integration in your own system you can listen to the events exposed by the ZenderPlayerDelegate and send it to your own tracking system.
+
 # Push notifications
 The Zender Admin console provides a way to send push notifications to users to notifiy them when new streams are available.
 This requires push notification certificate setup to match the bundleId of your app and allowing us to send the push notifications.
 
+The default application delegate handler automatically will detect the device token ; sometimes you handle this manually (for example as part of your onboarding flow).
+Then you can use the api client instead.
+
 ## Creating a userDevice object
     ZenderUserDevice *userDevice = [ZenderUserDevice new];
     userDevice.token = @"<a valid device token>";
- 
  
 ## Configure the ZenderPlayer with the correct Device
 In the menu of the Zender player you can enable/disable push notifications. To match the correct device token , you need to specify the correct deviceToken in the configuration.
@@ -282,6 +286,14 @@ There is a convenience method to check if this was a Zender Notification
 if ([[Zender sharedInstance] isZenderNotification:userInfo]) {
 }
 ```
+
+# Cocoapods
+The Zender cocoapod has the following subspecs:
+
+- Zender/LowLatency : this is the default that contains both Core and Phenix support
+- Zender/Core: this supports only the internal AVPlayer and no low latency
+- Zender/Phenix: specific support for PhenixSDK Player
+- Zender/Youtube: specific support for Youtube Player
 
 # Debugging
 
