@@ -219,6 +219,8 @@ On iPad screens can be viewed in split screen , it's best to disable that
 The Zender frameworks provides `armv7, arm64, x86_64` architecture builds.
 To publish an app to the appstore, you need to strip the simulator part.
 
+[A sample strip script](scripts/strip-framework.sh)
+
 
 # Push notifications
 The Zender Admin console provides a way to send push notifications to users to notifiy them when new streams are available.
