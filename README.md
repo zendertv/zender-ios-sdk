@@ -149,11 +149,20 @@ Add the following to the top of your Podfile
 
 `source 'https://github.com/zendertv/Specs.git'`
 
+
+Add this pod :
+```
+ # Pods for ZenderDemo
+ pod 'Zender'
+```
+
 Note: The pod downloads a large zip file containing the frameworks , this might take some time
 
 ## Manual installation
 
 A zip file containing the sdk frameworks can be downloaded from <https://repo.zender.tv/ios/zender-ios-sdk-v2.1.0.zip>
+
+Note: the framework files are large, if you want to check them in you will require github Large File Support
 
 ### Add to Embedded Frameworks to the project
 The second step is to add the frameworks as embedded frameworks:
@@ -175,16 +184,6 @@ Now add the necessary frameworks under "General/Linked Frameworks and Libraries"
 - AVKit.framework
 
 # Additional configuration
-## Strip frameworks
-The Zender frameworks provides `armv7, arm64, x86_64` architecture builds.
-To publish an app to the appstore, you need to strip the simulator part.
-
-- Select your Application Target (on the left)
-- Select the Build Phases tab
-- Add a `Run Script` (plus sign top left) below the `Enmbedded Frameworks` section
-- Enter `bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Zender.framework/strip-framework.sh"`
-
-![Strip Frameworks](docs/images/ios/strip-frameworks.png?raw=true "Strip Framework")
 
 ### Disable bitcode
 Zender depends on frameworks that are currrently not BITCODE enabled.  Therefore you need to disable it:
@@ -193,15 +192,6 @@ Zender depends on frameworks that are currrently not BITCODE enabled.  Therefore
 - Find `Enable Bitcode` and select NO
 
 ![Disable bitcode](docs/images/ios/disable-bitcode.png?raw=true "Disable bitcode")
-
-### Orientation Portrait
-The Zender player autorotates, if you don't want this behaviour you need to fix the app rotation or the controller
-
-- Select your Application Target (on the left)
-- Select the `General` tab
-- Select/Deselect the required `Device Orientation` options
-
-![Fix portrait](docs/images/ios/portrait-only.png?raw=true "Fix Portrait Modus")
 
 ### Background audio
 To be able to play audio in background, add this to the background mode:
@@ -212,9 +202,22 @@ To be able to play audio in background, add this to the background mode:
 
 ![Background Audio](docs/images/ios/background-audio.png?raw=true "Background Audio")
 
+### Orientation Portrait
+The Zender player autorotates, if you don't want this behaviour you need to fix the app rotation or the controller
+
+- Select your Application Target (on the left)
+- Select the `General` tab
+- Select/Deselect the required `Device Orientation` options
+
+![Fix portrait](docs/images/ios/portrait-only.png?raw=true "Fix Portrait Modus")
+
 ### UI Fullscreen
 On iPad screens can be viewed in split screen , it's best to disable that
 ![Enable Full screen only](docs/images/ios/full-screen.png?raw=true "Enable Full Screen")
+
+## Strip frameworks
+The Zender frameworks provides `armv7, arm64, x86_64` architecture builds.
+To publish an app to the appstore, you need to strip the simulator part.
 
 
 # Push notifications
@@ -240,7 +243,10 @@ Just add the following part to your `AppDelegate.m`
 # Deeplinking
 Zender supports using Universal Deeplinks. The default zender domain is links.zender.tv . To make this work, the AppId needs to be configured in the backend.
 
+
 ## Enable Universal Links
+Add `links.zender.tv` under your domains.
+
 ![Enable Universal Links](docs/images/ios/enable-universallinks.png?raw=true "Enable Universal links")
 
 ## Sample code
