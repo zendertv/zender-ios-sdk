@@ -2,7 +2,7 @@
 
 This repository provides the iOS sdk version of the Zender Player.
 
-Current version is `2.1.0` , target :ios 9.0
+Current version is `2.1.0` , target :ios 9.0 (PhenixSdk version 2019.2.1)
 
 # Find your configuration in the Zender Admin
 - Logging to the admin <https://admin.zender.tv>
@@ -11,6 +11,12 @@ Current version is `2.1.0` , target :ios 9.0
 - Read the targetId and channelId
 
  ![Zender TargetId and ChannelId](docs/images/targetId-channelId.png?raw=true "Find your Zender TargetId and ChannelId")
+
+# Sample project
+A sample project is provided in this repo [Demo Project](ZenderDemo)
+
+- You'll need your targetId and channelId configured in the ViewController.m
+- the project uses Cocoapods , so requires a `pod install` to install all the dependencies
 
 # Usage
 
